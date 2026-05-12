@@ -2,39 +2,73 @@
 using namespace std;
 #include "Header.h"
 #include "Header1.h"
+enum MenuOption 
+{
+    EXIT = 0,
+    ADD_STUDENT,
+    REMOVE_STUDENT,
+    SHOW_ALL_STUDENTS,
+    SORT_BY_NAME,
+    SORT_BY_AVERAGE
+};
+void printMenu() 
+{
+    cout << "\nSTUDENT MANAGEMENT SYSTEM\n";
+    cout << ADD_STUDENT << " - Add new student" << endl;
+    cout << REMOVE_STUDENT << " - Remove student by ID" << endl;
+    cout << SHOW_ALL_STUDENTS << " - Show all students" << endl;
+    cout << SORT_BY_NAME << " - Sort students by name" << endl;
+    cout << SORT_BY_AVERAGE << " - Sort students by average score" << endl;
+    cout << EXIT << " - Exit" << endl;
+    cout << "Select option: ";
+}
+void runAcademy() 
+{
+    Student* students = nullptr;
+    uint size = 0;
+    int choice;
+
+    do 
+    {
+        printMenu();
+        cin >> choice;
+
+        switch (choice) 
+        {
+        case ADD_STUDENT:
+            addStudent(students, size);
+            break;
+        case REMOVE_STUDENT:
+            uint id;
+            cout << "Enter ID to remove: ";
+            cin >> id;
+            removeStudentById(students, size, id);
+            break;
+        case SHOW_ALL_STUDENTS:
+            showAllStudents(students, size);
+            break;
+        case SORT_BY_NAME:
+            sorting(students, size, sortByName);
+            break;
+        case SORT_BY_AVERAGE:
+            sorting(students, size, sortByAverage);
+            break;
+        case EXIT:
+            cout << "Exiting system. Cleaning memory..." << endl;
+            break;
+        default:
+            cout << "Invalid option! Try again." << endl;
+            break;
+        }
+    } while (choice != EXIT);
+
+    if (students != nullptr) 
+    {
+        clear(students, size);
+    }
+}
 int main()
 {
-	uint size;
-	cout << "Enter size: ";
-	cin >> size;
-
-	//cin.ignore();
-	Student* students = new Student[size];
-	for (uint i = 0; i < size; i++)
-	{
-		students[i] = createStudent();
-	}
-	for (uint i = 0; i < size; i++)
-	{
-		showStudent(students[i]);
-	}
-    addStudent(students, size);
-    cout << endl;
-    cout << "List after adding" << endl;
-    for (uint i = 0; i < size; i++)
-    {
-        showStudent(students[i]);
-    }
-    uint idToDelete;
-    cout << "Enter ID to delete: " << endl;
-    cin >> idToDelete;
-    removeStudentById(students, size, idToDelete);
-    cout << endl;
-    cout << "Final list" << endl;
-    for (uint i = 0; i < size; i++)
-    {
-        showStudent(students[i]);
-    }
-    clear(students, size);
+    runAcademy();
     return 0;
 }

@@ -1,5 +1,5 @@
 ﻿  Source.cpp
-D:\Project1\Project1\Header1.h(33,20): warning C4018: '<': signed/unsigned mismatch
+D:\Project1\Project1\Header1.h(42,20): warning C4018: '<': signed/unsigned mismatch
   (compiling source file 'Source.cpp')
   
   Project1.vcxproj -> D:\Project1\x64\Debug\Project1.exe

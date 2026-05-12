@@ -22,11 +22,20 @@ Student createStudent()
 }
 void showStudent(Student& std)
 {
+	cout << "\n===============\n";
 	cout << std.id << '\t'
 		<< std.name << '\t'
 		<< std.average << '\t'
 		<< std.birthdayDate.day << '.' << std.birthdayDate.month << '.'
 		<< std.birthdayDate.year << endl;
+	cout << "\n===============\n";
+}
+void showAllStudents(Student* students, uint size)
+{
+	for (uint i = 0; i < size; i++)
+	{
+		showStudent(students[i]);
+	}
 }
 void clearNames(Student* students, uint size)
 {
@@ -85,4 +94,42 @@ void removeStudentById(Student*& students, uint& size, uint idToRemove)
 	students = x;
 	size--;
 	cout << "Student with ID " << idToRemove << " removed successfully" << endl;
+}
+void sorting(Student* students, uint size, void(*sort)(Student* students, uint size))
+{
+	sort(students, size);
+}
+void sortByName(Student* students, uint size)
+{
+	//bubble sort
+	for (uint i = 0; i < size - 1; i++)
+	{
+		for (uint j = 0; j < size - 1 - i; j++)
+		{
+			if (strcmp(students[j].name, students[j + 1].name) > 0)
+			{
+				/*Student temp = students[j];
+				students[j] = students[j + 1];
+				students[j + 1] = temp;*/
+				swap(students[j], students[j + 1]);
+			}
+		}
+	}
+}
+void sortByAverage(Student* students, uint size)
+{
+	//bubble sort
+	for (uint i = 0; i < size - 1; i++)
+	{
+		for (uint j = 0; j < size - 1 - i; j++)
+		{
+			if (strcmp(students[j].name, students[j + 1].name) > 0)
+			{
+				/*Student temp = students[j];
+				students[j] = students[j + 1];
+				students[j + 1] = temp;*/
+				swap(students[j], students[j + 1]);
+			}
+		}
+	}
 }
